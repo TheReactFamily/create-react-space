@@ -1,0 +1,24 @@
+{
+  "name": "create-react-space",
+  "version": "1.0.0",
+  "description": "The easiest way of setting up a modern, powerful and scalable react project.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/space-rx/create-react-space.git"
+  },
+  "keywords": [
+    "react",
+    "react-project",
+    "react-app"
+  ],
+  "author": "Arrastia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/space-rx/create-react-space/issues"
+  },
+  "homepage": "https://github.com/space-rx/create-react-space#readme"
+}

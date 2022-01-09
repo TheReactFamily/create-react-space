@@ -1,0 +1,14 @@
+node_modules
+build/
+
+.DS_Store
+.env
+.eslintcache
+.npm-cache
+.tags*
+.vscode
+*.log
+*.tsbuildinfo
+*~
+
+package-lock.json
