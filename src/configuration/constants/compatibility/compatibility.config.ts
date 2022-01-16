@@ -1,0 +1,1 @@
+export const SUPPORTED_NODE_VERSION = 14;
