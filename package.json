@@ -4,9 +4,10 @@
   "description": "The easiest way of setting up a modern, powerful and scalable react project.",
   "main": "build",
   "scripts": {
-    "start:dev": "npx ts-node index.ts",
+    "build": "tsc",
+    "start:dev": "npx ts-node ./src/index.ts",
     "start": "node build/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -29,11 +30,13 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^27.4.0",
     "@types/node": "^17.0.8",
     "@types/prompts": "^2.0.14",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
     "eslint": "^8.6.0",
+    "jest": "^27.4.7",
     "typescript": "^4.5.4"
   }
 }
