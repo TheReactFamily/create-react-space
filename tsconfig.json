@@ -14,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "outDir": "build",
     "resolveJsonModule": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "skipLibCheck": true,
     "strict": true,
     "target": "ES6"
