@@ -19,6 +19,8 @@ export function app() {
     .option('--help', 'Display help menu')
     .option('--use-npm', 'Use npm to install dependencies. (Default when Yarn is not installed)')
     .option('-y, --yes', 'Use the default options to create the space')
+    .option('-t, --template [template|url]', 'The name of a template from spaces/templates or URL to a GitHub repo that contains a template')
+    .option('--template-path [name]', 'The path inside of a GitHub repo where the example lives')
     .allowUnknownOption()
     .action(projectRoot => (inputPath = projectRoot))
     .parse(process.argv);
