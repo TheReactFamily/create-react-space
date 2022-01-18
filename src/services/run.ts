@@ -11,7 +11,6 @@ import type { IRun } from '../@types/Run';
 
 export const run = async ({ inputPath, program }: IRun) => {
   let projectRoot: string;
-  let resolvedTemplate: string;
 
   if (!inputPath && program.yes) {
     projectRoot = resolve(process.cwd());
@@ -23,7 +22,10 @@ export const run = async ({ inputPath, program }: IRun) => {
     projectRoot = await resolveProjectDirectory(inputPath, program);
   }
 
-  if (!program.yes) {
+  let resolvedTemplate = program.template;
+  // let templatePath = program.templatePath;
+
+  if (!program.yes && !resolvedTemplate) {
     resolvedTemplate = await chooseStartingPoint();
   }
 
