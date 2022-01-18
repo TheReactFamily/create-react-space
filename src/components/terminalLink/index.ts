@@ -1,0 +1,1 @@
+export { terminalLink } from './terminalLink';
