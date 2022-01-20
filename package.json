@@ -27,11 +27,13 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
+    "cross-spawn": "^7.0.3",
     "fs-extra": "^10.0.0",
     "ora": "^4.0.3",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.8",
