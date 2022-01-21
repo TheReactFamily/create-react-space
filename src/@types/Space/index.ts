@@ -1,1 +1,1 @@
-export type { SpaceSetupType } from './Space.types';
+export type { SpaceLanguage, SpaceSetupType } from './Space.types';
