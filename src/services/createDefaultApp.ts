@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import os from 'os';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
-import { join, resolve } from 'path';
+import path, { join, resolve } from 'path';
 
 import { install } from './install';
 
@@ -10,16 +10,18 @@ import { getPackageInfo } from '../helpers/getPackageInfo';
 import { getTemplateInstallPackage } from '../helpers/getTemplateInstallPackage';
 
 import { isOnline } from '../utils/isOnline';
+import { executeNodeScript } from '../helpers/executeNodeScript';
 
 interface CreateDefaultAppProps {
   appName: string;
   directory: string;
-  version: string;
 }
 
-export const createDefaultApp = ({ appName, directory, version }: CreateDefaultAppProps) => {
+export const createDefaultApp = ({ appName, directory }: CreateDefaultAppProps) => {
   const packageJson = { name: appName, private: true, version: '1.0.0' };
   writeFileSync(join(resolve(appName), 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
+
+  const root = resolve(appName);
 
   // const originalDirectory = process.cwd();
   process.chdir(resolve(appName));
@@ -45,21 +47,33 @@ export const createDefaultApp = ({ appName, directory, version }: CreateDefaultA
       })
       .then(async ({ packageInfo, templateInfo }) => {
         const packageName = packageInfo.name;
-        const templateName = undefined;
+        // const templateName = templateInfo.name;
+        const templateName = 'cra-template-typescript';
+
+        console.log('templateName', templateName);
 
         // setCaretRangeForRuntimeDeps(packageName);
 
         // const pnpPath = path.resolve(process.cwd(), '.pnp.js');
-        // const nodeArgs = fs.existsSync(pnpPath) ? ['--require', pnpPath] : [];
+        const nodeArgs: string[] = [];
+        console.log('packageName', packageName);
 
-        // await executeNodeScript(
-        //   { cwd: process.cwd(), args: nodeArgs },
-        //   [root, appName, verbose, originalDirectory, templateName],
-        //   `
-        //   const init = require('${packageName}/scripts/init.js');
-        //   init.apply(null, JSON.parse(process.argv[1]));
-        //   `
-        // );
+        // const init = require(`${packageName}/scripts/init.js`);
+        // init.apply(`${path.resolve(appName)}`, JSON.parse(process.argv[1]), false, '', templateName);
+
+        const response = await executeNodeScript(
+          { cwd: process.cwd(), args: nodeArgs },
+          [root, appName, templateName],
+          // `
+          //   const init = require('${packageName}/scripts/init.js');
+          //   init.apply(${path.resolve(appName)}, JSON.parse(process.argv[1]));
+          // `
+          `
+            const init = require('${packageName}/scripts/init.js');
+            init.apply('${path.resolve(appName)}', JSON.parse(process.argv[1]), false, '', ${templateName});
+          `
+        );
+        console.log('response', response);
       })
       .catch(reason => {
         console.log('reason', reason);
