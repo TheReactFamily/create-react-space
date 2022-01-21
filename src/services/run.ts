@@ -6,15 +6,17 @@ import { resolveProjectDirectory } from './resolveProjectDirectory';
 
 import { assertFolderEmpty } from '../helpers/assertFolderEmpty';
 import { assertValidName } from '../helpers/assertValidName';
+import { chooseLanguage } from '../helpers/chooseLanguage';
 import { chooseSetupType } from '../helpers/chooseSetupType';
 
 import type { IRun } from '../@types/Run';
-import type { SpaceSetupType } from '../@types/Space';
+import type { SpaceLanguage, SpaceSetupType } from '../@types/Space';
 
 export const run = async ({ inputPath, program }: IRun) => {
   let appSetupType: SpaceSetupType;
   let projectRoot: string;
   let resolvedTemplate: string;
+  let spaceLanguage: SpaceLanguage;
 
   if (!inputPath && program.yes) {
     projectRoot = resolve(process.cwd());
@@ -32,7 +34,9 @@ export const run = async ({ inputPath, program }: IRun) => {
     if (appSetupType === 'DEFAULT') {
       console.log('projectRoot', projectRoot);
       console.log('folderName', basename(projectRoot));
-      await createDefaultApp({ appName: basename(projectRoot), directory: projectRoot, version: '1.0.0' });
+      spaceLanguage = await chooseLanguage();
+
+      await createDefaultApp({ appName: basename(projectRoot), directory: projectRoot });
     }
   }
 
