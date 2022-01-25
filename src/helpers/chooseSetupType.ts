@@ -1,4 +1,4 @@
-import prompts from 'prompts';
+import { promptSelect } from '../components/promptSelect';
 
 import { TEMPLATES_REPOSITORY } from '../configuration/constants/links';
 
@@ -16,7 +16,5 @@ export const chooseSetupType = async () => {
     { title: `Template from ${link}`, value: 'TEMPLATE' }
   ];
 
-  const { value } = await prompts({ choices, limit: 11, message: 'How would you like to start', name: 'value', type: 'select' });
-
-  return value as SpaceSetupType;
+  return await promptSelect({ limit: 15, message: 'How would you like to start', options: choices });
 };

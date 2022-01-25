@@ -1,4 +1,4 @@
-import prompts from 'prompts';
+import { promptSelect } from '../components/promptSelect';
 
 import type { SpaceLanguage } from '../@types/Space';
 
@@ -10,7 +10,5 @@ export const chooseLanguage = async () => {
     { title: 'Javascript', value: 'JAVASCRIPT' }
   ];
 
-  const { value } = await prompts({ choices, message: 'Which language would you like to use?', name: 'value', type: 'select' });
-
-  return value as SpaceLanguage;
+  return await promptSelect({ message: 'Which language would you like to use?', options: choices });
 };
