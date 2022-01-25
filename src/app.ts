@@ -6,7 +6,6 @@ import { run } from './services/run';
 import type { IProgram } from './@types/Program';
 
 export function app() {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const packageJSON = require('../package.json');
 
   let inputPath = '';
@@ -31,6 +30,7 @@ export function app() {
     console.log(`  ${cyan(program.name())} ${green('my-react-app')}`);
     console.log();
     console.log(`Run ${cyan(`${program.name()} --help`)} to see all options.`);
+
     process.exit(1);
   }
 
