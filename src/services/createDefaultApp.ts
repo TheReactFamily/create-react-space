@@ -11,6 +11,7 @@ import { getTemplateInstallPackage } from '../helpers/getTemplateInstallPackage'
 
 import { isOnline } from '../utils/isOnline';
 import { executeNodeScript } from '../helpers/executeNodeScript';
+import { addTemplate } from './addTemplate';
 
 interface CreateDefaultAppProps {
   appName: string;
@@ -18,18 +19,20 @@ interface CreateDefaultAppProps {
 }
 
 export const createDefaultApp = ({ appName, directory }: CreateDefaultAppProps) => {
-  const packageJson = { name: appName, private: true, version: '1.0.0' };
-  writeFileSync(join(resolve(appName), 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
-
-  const root = resolve(appName);
-
-  // const originalDirectory = process.cwd();
-  process.chdir(resolve(appName));
+  const root = path.resolve(appName);
   ensureDirSync(appName);
-
   console.log();
   console.log(`Creating a new React space in ${chalk.green(directory)}.`);
   console.log();
+
+  const packageJson = { name: appName, private: true, version: '1.0.0' };
+  writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2) + os.EOL);
+
+  // const root = resolve(appName);
+
+  const originalDirectory = process.cwd();
+  process.chdir(root);
+  // ensureDirSync(appName);
 
   Promise.all([getInstallPackage(), getTemplateInstallPackage()]).then(([packageToInstall, templateToInstall]) => {
     console.log();
@@ -47,8 +50,8 @@ export const createDefaultApp = ({ appName, directory }: CreateDefaultAppProps) 
       })
       .then(async ({ packageInfo, templateInfo }) => {
         const packageName = packageInfo.name;
-        // const templateName = templateInfo.name;
-        const templateName = 'cra-template-typescript';
+        const templateName = templateInfo.name;
+        // const templateName = 'cra-template-typescript';
 
         console.log('templateName', templateName);
 
@@ -68,9 +71,10 @@ export const createDefaultApp = ({ appName, directory }: CreateDefaultAppProps) 
           //   const init = require('${packageName}/scripts/init.js');
           //   init.apply(${path.resolve(appName)}, JSON.parse(process.argv[1]));
           // `
+          // const init = require('${packageName}/scripts/init.js');
+          // init.apply('${path.resolve(appName)}', JSON.parse(process.argv[1]), false, '', '${templateName}');
           `
-            const init = require('${packageName}/scripts/init.js');
-            init.apply('${path.resolve(appName)}', JSON.parse(process.argv[1]), false, '', ${templateName});
+            '${addTemplate(root, appName, '', root, templateName)}';
           `
         );
         console.log('response', response);
