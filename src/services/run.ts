@@ -1,5 +1,4 @@
-import { basename, resolve } from 'path';
-import { ensureDir } from 'fs-extra';
+import path, { basename, resolve } from 'path';
 
 import { createDefaultApp } from './createDefaultApp';
 import { resolveProjectDirectory } from './resolveProjectDirectory';
@@ -32,13 +31,12 @@ export const run = async ({ inputPath, program }: IRun) => {
     appSetupType = await chooseSetupType();
 
     if (appSetupType === 'DEFAULT') {
-      console.log('projectRoot', projectRoot);
-      console.log('folderName', basename(projectRoot));
       spaceLanguage = await chooseLanguage();
 
       await createDefaultApp({ appName: basename(projectRoot), directory: projectRoot });
+    } else {
+      const templateDir = 'cra-template';
+      path.dirname(require.resolve(`../templates/${templateDir}/package.json`));
     }
   }
-
-  await ensureDir(projectRoot);
 };
