@@ -1,5 +1,5 @@
 export const getTemplateInstallPackage = () => {
-  const templateToInstall = 'default';
+  const templateToInstall = 'cra-template';
 
   return Promise.resolve(templateToInstall);
 };
