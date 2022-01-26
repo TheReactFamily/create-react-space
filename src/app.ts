@@ -1,14 +1,27 @@
+import { basename, dirname, resolve } from 'path';
 import { Command } from 'commander';
 import { cyan, green } from 'chalk';
 
-import { run } from './services/run';
+import { assertFolderEmpty } from './helpers/assertFolderEmpty';
+import { assertValidName } from './helpers/assertValidName';
+import { chooseLanguage } from './helpers/chooseLanguage';
+import { chooseSetupType } from './helpers/chooseSetupType';
+
+// import { createDefaultApp } from './services/createDefaultApp';
+import { createSpace } from './services/createSpace';
+import { resolveProjectDirectory } from './services/resolveProjectDirectory';
 
 import type { IProgram } from './@types/Program';
+import type { SpaceLanguage, SpaceSetupType } from './@types/Space';
 
-export function app() {
+export async function app() {
   const packageJSON = require('../package.json');
 
+  let appSetupType: SpaceSetupType;
   let inputPath = '';
+  let projectRoot: string;
+  let resolvedTemplate: string;
+  let spaceLanguage: SpaceLanguage;
 
   const program: IProgram = new Command(packageJSON.name)
     .version(packageJSON.version)
@@ -27,12 +40,43 @@ export function app() {
     console.log(`  ${cyan(program.name())} ${green('<project-directory>')}`);
     console.log();
     console.log('For example:');
-    console.log(`  ${cyan(program.name())} ${green('my-react-app')}`);
+    console.log(`  ${cyan(program.name())} ${green('my-react-space')}`);
     console.log();
     console.log(`Run ${cyan(`${program.name()} --help`)} to see all options.`);
 
     process.exit(1);
   }
 
-  run({ inputPath, program });
+  if (!inputPath && program.yes) {
+    projectRoot = resolve(process.cwd());
+
+    const folderName = basename(projectRoot);
+    assertValidName(folderName);
+    assertFolderEmpty(folderName, projectRoot);
+  } else {
+    projectRoot = await resolveProjectDirectory(inputPath, program);
+  }
+
+  if (!program.yes) {
+    appSetupType = await chooseSetupType();
+    spaceLanguage = await chooseLanguage();
+
+    switch (appSetupType) {
+      case 'CRA':
+        createSpace(basename(projectRoot), [], 'cra-template');
+        break;
+
+      case 'DEFAULT':
+        createSpace(basename(projectRoot), [], 'default');
+        break;
+
+      case 'TEMPLATE':
+        const templateDir = 'cra-template';
+        dirname(require.resolve(`../templates/${templateDir}/package.json`));
+        break;
+
+      default:
+        throw new Error('Incorrect option selected.');
+    }
+  }
 }

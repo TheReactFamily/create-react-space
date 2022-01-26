@@ -29,14 +29,23 @@ export const run = async ({ inputPath, program }: IRun) => {
 
   if (!program.yes) {
     appSetupType = await chooseSetupType();
+    spaceLanguage = await chooseLanguage();
 
-    if (appSetupType === 'DEFAULT') {
-      spaceLanguage = await chooseLanguage();
+    switch (appSetupType) {
+      case 'CRA':
+        break;
 
-      await createDefaultApp({ appName: basename(projectRoot), directory: projectRoot });
-    } else {
-      const templateDir = 'cra-template';
-      path.dirname(require.resolve(`../templates/${templateDir}/package.json`));
+      case 'DEFAULT':
+        createDefaultApp({ appName: basename(projectRoot), directory: projectRoot });
+        break;
+
+      case 'TEMPLATE':
+        const templateDir = 'cra-template';
+        path.dirname(require.resolve(`../templates/${templateDir}/package.json`));
+        break;
+
+      default:
+        throw new Error('Incorrect option selected.');
     }
   }
 };
