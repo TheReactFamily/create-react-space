@@ -12,7 +12,8 @@ export const chooseSetupType = async () => {
   const link = terminalLink({ text: 'spaces/templates', url: TEMPLATES_REPOSITORY });
 
   const choices: Choice[] = [
-    { title: 'Default new app', value: 'DEFAULT' },
+    { title: 'Default, clean new space', value: 'DEFAULT' },
+    { title: 'Classic create-react-app', value: 'CRA' },
     { title: `Template from ${link}`, value: 'TEMPLATE' }
   ];
 
