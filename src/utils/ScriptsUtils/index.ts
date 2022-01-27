@@ -1,0 +1,1 @@
+export { adaptScriptForYarn } from './adaptScriptForYarn';
