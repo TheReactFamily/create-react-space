@@ -95,19 +95,10 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
     console.log('Initialized a git repository.');
   }
 
-  let args;
-  let command;
-  let remove;
+  let args = isUsingYarn ? ['add'] : ['install', '--no-audit', '--save'].filter(e => e);
 
-  if (isUsingYarn) {
-    command = 'yarnpkg';
-    remove = 'remove';
-    args = ['add'];
-  } else {
-    command = 'npm';
-    remove = 'uninstall';
-    args = ['install', '--no-audit', '--save'].filter(e => e);
-  }
+  const command = isUsingYarn ? 'yarnpkg' : 'npm';
+  const remove = isUsingYarn ? 'remove' : 'uninstall';
 
   // Install additional template dependencies, if present.
   const dependenciesToInstall = Object.entries({ ...templatePackage.dependencies, ...templatePackage.devDependencies });
