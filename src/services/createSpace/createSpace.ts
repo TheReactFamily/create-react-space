@@ -7,7 +7,7 @@ import { FIXED_DEPENDENCIES } from '../../configuration/constants/dependencies';
 
 import { executeNodeScript } from '../../helpers/executeNodeScript';
 
-import { addTemplate } from '../addTemplate';
+import { generateTemplate } from '../generateTemplate';
 import { install } from '../install';
 
 import type { Templates } from '../../@types/Space/Space.types';
@@ -33,7 +33,8 @@ export const createSpace = async (name: string, dependencies: string[], template
     console.log();
 
     await install(FIXED_DEPENDENCIES.concat(dependencies));
-    await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${addTemplate(root, name, '', root, template)}'`);
+    // await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${addTemplate(root, name, '', root, template)}'`);
+    await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${generateTemplate(name, root, template, 'js')}'`);
   } catch (error) {
     console.log('reason', error);
     process.exit(1);
