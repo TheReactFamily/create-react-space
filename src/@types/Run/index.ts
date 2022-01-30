@@ -1,1 +1,1 @@
-export { IRun } from './Run.types';
+export type { IRun } from './Run.types';
