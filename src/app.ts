@@ -6,9 +6,9 @@ import { assertFolderEmpty } from './helpers/assertFolderEmpty';
 import { assertValidName } from './helpers/assertValidName';
 import { chooseLanguage } from './helpers/chooseLanguage';
 import { chooseSetupType } from './helpers/chooseSetupType';
+import { resolveProjectDirectory } from './helpers/resolveProjectDirectory';
 
 import { createSpace } from './services/createSpace';
-import { resolveProjectDirectory } from './services/resolveProjectDirectory';
 
 import type { IProgram } from './@types/Program';
 import type { SpaceLanguage, SpaceSetupType } from './@types/Space';

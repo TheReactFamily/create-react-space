@@ -2,9 +2,9 @@ import { basename, resolve } from 'path';
 import { ensureDir } from 'fs-extra';
 import { green, magenta } from 'chalk';
 
-import { assertFolderEmpty } from '../helpers/assertFolderEmpty';
-import { assertValidName } from '../helpers/assertValidName';
-import { chooseSpaceName } from '../helpers/chooseSpaceName';
+import { assertFolderEmpty } from './assertFolderEmpty';
+import { assertValidName } from './assertValidName';
+import { chooseSpaceName } from './chooseSpaceName';
 
 import type { IProgram } from '../@types/Program';
 
