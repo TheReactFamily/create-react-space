@@ -7,7 +7,6 @@ import { assertValidName } from './helpers/assertValidName';
 import { chooseLanguage } from './helpers/chooseLanguage';
 import { chooseSetupType } from './helpers/chooseSetupType';
 
-// import { createDefaultApp } from './services/createDefaultApp';
 import { createSpace } from './services/createSpace';
 import { resolveProjectDirectory } from './services/resolveProjectDirectory';
 

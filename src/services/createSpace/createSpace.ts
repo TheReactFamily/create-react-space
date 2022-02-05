@@ -38,6 +38,4 @@ export const createSpace = async (name: string, dependencies: string[], template
     console.log('reason', error);
     process.exit(1);
   }
-
-  return null;
 };
