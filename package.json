@@ -4,10 +4,12 @@
   "description": "The easiest way of setting up a modern, powerful and scalable react project.",
   "main": "build",
   "scripts": {
-    "build": "tsc",
     "start:dev": "npx ts-node ./src/index.ts",
     "start": "node build/index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "clean": "rimraf build/",
+    "copy-files": "copyfiles -u 1 templates/**/* build/templates",
+    "build": "npm run clean && tsc && npm run copy-files"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/space-rx/create-react-space/issues"
+  },
+  "bin": {
+    "create-react-space": "./src/index.ts"
   },
   "homepage": "https://github.com/space-rx/create-react-space#readme",
   "dependencies": {

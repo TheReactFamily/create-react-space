@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "module": "CommonJS",
     "moduleResolution": "node",
-    "noEmit": true,
+    "noEmit": false,
     "noFallthroughCasesInSwitch": true,
     "outDir": "build",
     "resolveJsonModule": true,
