@@ -12,7 +12,6 @@ import { createSpace } from './services/createSpace';
 
 import type { IProgram } from './@types/Program';
 import type { SpaceLanguage, SpaceSetupType } from './@types/Space';
-import { verifyTypeScriptSetup } from './services/verifyTypeScriptSetup';
 
 export async function app() {
   const packageJSON = require('../package.json');
