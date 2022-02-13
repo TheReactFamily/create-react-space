@@ -12,6 +12,7 @@ import { createSpace } from './services/createSpace';
 
 import type { IProgram } from './@types/Program';
 import type { SpaceLanguage, SpaceSetupType } from './@types/Space';
+import { verifyTypeScriptSetup } from './services/verifyTypeScriptSetup';
 
 export async function app() {
   const packageJSON = require('../package.json');
@@ -62,17 +63,17 @@ export async function app() {
 
     switch (appSetupType) {
       case 'CRA':
-        createSpace(basename(projectRoot), [], 'cra-template');
+        createSpace(basename(projectRoot), [], 'cra-template', spaceLanguage);
         break;
 
       case 'DEFAULT':
-        createSpace(basename(projectRoot), [], 'default');
+        createSpace(basename(projectRoot), [], 'default', spaceLanguage);
         break;
 
-      case 'TEMPLATE':
-        const templateDir = 'cra-template';
-        dirname(require.resolve(`../templates/${templateDir}/package.json`));
-        break;
+      // case 'TEMPLATE':
+      //   const templateDir = 'cra-template';
+      //   dirname(require.resolve(`../templates/${templateDir}/package.json`));
+      //   break;
 
       default:
         throw new Error('Incorrect option selected.');

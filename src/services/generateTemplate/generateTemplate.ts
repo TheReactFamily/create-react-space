@@ -25,7 +25,7 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
   const isUsingYarn = existsSync(join(spacePath, 'yarn.lock'));
 
   const templatePath = dirname(require.resolve(`../../templates/${template}/package.json`));
-  const templateJSONPath = join(templatePath, 'template.json');
+  const templateJSONPath = join(templatePath, chosenLanguage === 'js' ? 'template.json' : 'template-ts.json');
 
   const templateJson: ConfigurationTemplate = existsSync(templateJSONPath) ? require(templateJSONPath) : {};
   const templatePackage = templateJson.package || {};
