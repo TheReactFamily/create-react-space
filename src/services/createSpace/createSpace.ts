@@ -4,15 +4,16 @@ import { EOL } from 'os';
 import { join, resolve } from 'path';
 
 import { FIXED_DEPENDENCIES } from '../../configuration/constants/dependencies';
+import { FIXED_DEV_DEPENDENCIES } from '../../configuration/constants/dependencies/dependencies.constant';
 
 import { executeNodeScript } from '../../helpers/executeNodeScript';
 
 import { generateTemplate } from '../generateTemplate';
 import { install } from '../install';
 
-import type { Templates } from '../../@types/Space/Space.types';
+import type { SpaceLanguage, Templates } from '../../@types/Space/Space.types';
 
-export const createSpace = async (name: string, dependencies: string[], template: Templates) => {
+export const createSpace = async (name: string, dependencies: string[], template: Templates, chosenLanguage: SpaceLanguage) => {
   const packageJson = { name: name, private: true, version: '1.0.0' };
   const root = resolve(name);
 
@@ -33,7 +34,8 @@ export const createSpace = async (name: string, dependencies: string[], template
     console.log();
 
     await install(FIXED_DEPENDENCIES.concat(dependencies));
-    await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${generateTemplate(name, root, template, 'js')}'`);
+    await install(FIXED_DEV_DEPENDENCIES[chosenLanguage].concat(dependencies), 'dev');
+    await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${generateTemplate(name, root, template, chosenLanguage)}'`);
   } catch (error) {
     console.log('reason', error);
     process.exit(1);
