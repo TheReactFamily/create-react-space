@@ -1,7 +1,8 @@
 {
   "name": "create-react-space",
-  "version": "1.0.0",
   "description": "The easiest way of setting up a modern, powerful and scalable react project.",
+  "version": "1.0.0",
+  "author": "Arrastia",
   "main": "build",
   "scripts": {
     "start:dev": "npx ts-node ./src/index.ts",
@@ -20,14 +21,16 @@
     "react-project",
     "react-app"
   ],
-  "author": "Arrastia",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/space-rx/create-react-space/issues"
   },
   "bin": {
-    "create-react-space": "./src/index.ts"
+    "create-react-space": "./build/index.js"
   },
+  "files": [
+    "build"
+  ],
   "homepage": "https://github.com/space-rx/create-react-space#readme",
   "dependencies": {
     "chalk": "^4.1.2",
