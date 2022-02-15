@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 import { cyan, green, redBright } from 'chalk';
-
-import { app } from './app';
+import { pastel } from 'gradient-string';
 
 import { SUPPORTED_NODE_VERSION } from './configuration/constants/compatibility';
+
+import { saturn } from './components/saturn';
+
+import { app } from './app';
 
 const nodeVersion = process.versions.node;
 
@@ -17,5 +20,11 @@ if (parseInt(nodeVersion) < SUPPORTED_NODE_VERSION) {
 
   process.exit(1);
 }
+
+console.log(pastel.multiline(saturn()));
+console.log();
+console.log();
+console.log(`🪐 Welcome to React Spaces! Let's get you set up with a new project.`);
+console.log();
 
 app();
