@@ -1,5 +1,5 @@
 import { appendFileSync, copySync, existsSync, moveSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'fs-extra';
-import { cyan, green, yellow } from 'chalk';
+import { green } from 'chalk';
 import { dirname, join } from 'path';
 import { EOL } from 'os';
 import spawn from 'cross-spawn';
@@ -7,11 +7,14 @@ import spawn from 'cross-spawn';
 import { PACKAGE_KEYS_TO_IGNORE, PACKAGE_KEYS_TO_MERGE } from '../../configuration/constants/dependencies/dependencies.constant';
 import { SUPPORTED_BROWSERS } from '../../configuration/constants/compatibility/compatibility.config';
 
+import { createSpaceConfigurationFiles } from '../createSpaceConfigurationFiles';
+import { showSuccessMessages } from '../showSuccessMessages';
+
 import { adaptScriptForYarn } from '../../utils/ScriptsUtils';
 import { tryGitCommit, tryGitInit } from '../../utils/GitUtils';
 
-import type { ConfigurationPackage, ConfigurationTemplate, PackageThings, SpaceLanguage, Templates } from '../../@types/Space/Space.types';
 import type { MoveOptions } from 'fs-extra';
+import type { ConfigurationPackage, ConfigurationTemplate, PackageThings, SpaceLanguage, Templates } from '../../@types/Space/Space.types';
 
 const DEFAULT_REACT_SCRIPTS = {
   start: 'react-scripts start',
@@ -64,14 +67,15 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
     return;
   }
 
+  // CREATE PRETTIER AND ESLINT
+  createSpaceConfigurationFiles(chosenLanguage);
+
   // modifies README.md commands based on user used package manager.
   if (isUsingYarn) {
     try {
       const readme = readFileSync(join(spacePath, 'README.md'), 'utf8');
       writeFileSync(join(spacePath, 'README.md'), readme.replace(/(npm run |npm )/g, 'yarn '), 'utf8');
-    } catch (err) {
-      // Silencing the error. As it fall backs to using default npm commands.
-    }
+    } catch (error) {}
   }
 
   const hasGitignore = existsSync(join(spacePath, '.gitignore'));
@@ -107,11 +111,10 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
     args = args.concat(dependenciesToInstall.map(([dependency, version]) => `${dependency}@${version}`));
   }
 
-  // TYPESCRIPT
-  if (args.find(arg => arg.includes('typescript'))) {
-    console.log('ups, typescript is not supported, please, check it in 5 days');
-    // verifyTypeScriptSetup();
-  }
+  // TODO: verify TYPESCRIPT
+  // if (args.find(arg => arg.includes('typescript'))) {
+  // verifyTypeScriptSetup();
+  // }
 
   // Remove template
   console.log(`Removing template package using ${command}...`);
@@ -130,49 +133,7 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
     console.log('Created git commit.');
   }
 
-  // Display the most elegant way to cd.
-  // This needs to handle an undefined originalDirectory for
-  // backward compatibility with old global-cli's.
-  let relativePath;
-  let originalDirectory = '';
-  if (originalDirectory && join(originalDirectory, spaceName) === spacePath) {
-    relativePath = spaceName;
-  } else {
-    relativePath = spacePath;
-  }
-
-  // Change displayed command to yarn instead of yarnpkg
-  const displayedCommand = isUsingYarn ? 'yarn' : 'npm';
-
-  console.log();
-  console.log(`✔ Success! The space ${green(spaceName)} was created at ${green(spacePath)}`);
-  console.log('Inside that directory, you can run several commands:');
-  console.log();
-  console.log(cyan(`  ${displayedCommand} start`));
-  console.log('    Starts the development server.');
-  console.log();
-  console.log(cyan(`  ${displayedCommand} ${isUsingYarn ? '' : 'run '}build`));
-  console.log('    Bundles the app into static files for production.');
-  console.log();
-  console.log(cyan(`  ${displayedCommand} test`));
-  console.log('    Starts the test runner.');
-  console.log();
-  console.log(cyan(`  ${displayedCommand} ${isUsingYarn ? '' : 'run '}eject`));
-  console.log('    Removes this tool and copies build dependencies, configuration files');
-  console.log('    and scripts into the app directory. If you do this, you can’t go back!');
-  console.log();
-  console.log('We suggest that you begin by typing:');
-  console.log();
-  console.log(cyan('  cd'), relativePath);
-  console.log(`  ${cyan(`${displayedCommand} start`)}`);
-
-  if (hasReadme) {
-    console.log();
-    console.log(yellow('You had a `README.md` file, we renamed it to `README.old.md`'));
-  }
-
-  console.log();
-  console.log(cyan('Happy hacking!'));
+  showSuccessMessages(spaceName, spacePath, hasReadme, isUsingYarn);
 };
 
 const templatePackageToReplace = (pack: ConfigurationPackage) => {

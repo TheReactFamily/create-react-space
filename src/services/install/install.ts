@@ -6,7 +6,7 @@ export const install = (dependencies: string[], type?: InstallationType) => {
   return new Promise<void>((resolve, reject) => {
     const command = 'npm';
 
-    const args = (type !== 'dev' ? ['install', '--no-audit', '--save', '--save-exact', '--loglevel', 'error'] : ['install', '--save-dev']).concat(
+    const args = (type !== 'dev' ? ['install', '--no-audit', '--save', '--save-exact', '--loglevel', 'silent'] : ['install', '--save-dev']).concat(
       dependencies
     );
 
