@@ -13,7 +13,7 @@ export const FIXED_DEV_DEPENDENCIES = {
   ]
 };
 
-export const PACKAGE_KEYS_TO_MERGE = ['dependencies', 'scripts'];
+export const PACKAGE_KEYS_TO_MERGE = ['dependencies', 'devDependencies', 'scripts'];
 
 export const PACKAGE_KEYS_TO_IGNORE = [
   'author',
