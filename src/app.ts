@@ -46,6 +46,11 @@ export async function app() {
     process.exit(1);
   }
 
+  if (program.yes) {
+    projectRoot = await resolveProjectDirectory(inputPath, program);
+    createSpace(basename(projectRoot), [], 'default', 'js');
+  }
+
   if (!inputPath && program.yes) {
     projectRoot = resolve(process.cwd());
 
