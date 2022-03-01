@@ -15,7 +15,7 @@ export const showSuccessMessages = (spaceName: string, spacePath: string, hasRea
   }
 
   console.log();
-  console.log(`✔ Success! The space ${green(spaceName)} was created at ${green(spacePath)}`);
+  console.log(`🥳 Success! The space ${green(spaceName)} was created at ${green(spacePath)}`);
   console.log('Inside that directory, you can run several commands:');
   console.log();
   console.log(cyan(`  ${displayedCommand} start`));
@@ -42,5 +42,5 @@ export const showSuccessMessages = (spaceName: string, spacePath: string, hasRea
   }
 
   console.log();
-  console.log(cyan('Happy hacking!'));
+  console.log(cyan('Happy hacking! 🐱💻'));
 };
