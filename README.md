@@ -13,5 +13,5 @@
 <!-- BODY -->
 
 ```sh
-    npx create-react-space **space name**
+npx create-react-space **space name**
 ```
