@@ -24,8 +24,8 @@ export async function app() {
 
   const program: IProgram = new Command(packageJSON.name)
     .version(packageJSON.version)
-    .arguments('<project-root>')
-    .usage(`${cyan('<project-root>')} [options]`)
+    .argument('[project-root]', 'The path to the project root')
+    .usage(`${cyan('[project-root]')} [options]`)
     .description('Creates a react space')
     .option('--help', 'Display help menu')
     .option('--use-npm', 'Use npm to install dependencies. (Default when Yarn is not installed)')
@@ -34,17 +34,17 @@ export async function app() {
     .action(projectRoot => (inputPath = projectRoot))
     .parse(process.argv);
 
-  if (inputPath === '') {
-    console.error('Please specify the project directory:');
-    console.log(`  ${cyan(program.name())} ${green('<project-directory>')}`);
-    console.log();
-    console.log('For example:');
-    console.log(`  ${cyan(program.name())} ${green('my-react-space')}`);
-    console.log();
-    console.log(`Run ${cyan(`${program.name()} --help`)} to see all options.`);
+  // if (inputPath === '') {
+  //   console.error('Please specify the project directory:');
+  //   console.log(`  ${cyan(program.name())} ${green('<project-directory>')}`);
+  //   console.log();
+  //   console.log('For example:');
+  //   console.log(`  ${cyan(program.name())} ${green('my-react-space')}`);
+  //   console.log();
+  //   console.log(`Run ${cyan(`${program.name()} --help`)} to see all options.`);
 
-    process.exit(1);
-  }
+  //   process.exit(1);
+  // }
 
   if (program.yes) {
     projectRoot = await resolveProjectDirectory(inputPath, program);
