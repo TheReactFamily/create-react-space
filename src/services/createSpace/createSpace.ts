@@ -27,10 +27,8 @@ export const createSpace = async (name: string, dependencies: string[], template
   process.chdir(root);
 
   try {
-    await Promise.all([
-      install(FIXED_DEPENDENCIES.concat(dependencies)),
-      install(FIXED_DEV_DEPENDENCIES[chosenLanguage].concat(dependencies), 'dev')
-    ]);
+    await install(FIXED_DEPENDENCIES.concat(dependencies));
+    await install(FIXED_DEV_DEPENDENCIES[chosenLanguage].concat(dependencies), 'dev');
     await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${generateTemplate(name, root, template, chosenLanguage)}'`);
   } catch (error) {
     console.log('reason', error);
