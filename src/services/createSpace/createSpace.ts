@@ -27,14 +27,10 @@ export const createSpace = async (name: string, dependencies: string[], template
   process.chdir(root);
 
   try {
-    console.log();
-    console.log('Installing packages. This might take a couple of minutes.');
-    console.log();
-    console.log(`Installing: ${cyan('react')}, ${cyan('react-dom')}, and ${cyan('react-scripts')}...`);
-    console.log();
-
-    await install(FIXED_DEPENDENCIES.concat(dependencies));
-    await install(FIXED_DEV_DEPENDENCIES[chosenLanguage].concat(dependencies), 'dev');
+    await Promise.all([
+      install(FIXED_DEPENDENCIES.concat(dependencies)),
+      install(FIXED_DEV_DEPENDENCIES[chosenLanguage].concat(dependencies), 'dev')
+    ]);
     await executeNodeScript({ cwd: process.cwd(), args: [] }, [root, name, template], `'${generateTemplate(name, root, template, chosenLanguage)}'`);
   } catch (error) {
     console.log('reason', error);
