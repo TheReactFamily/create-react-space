@@ -1,7 +1,7 @@
 {
   "name": "create-react-space",
   "description": "The easiest way of setting up a modern, powerful and scalable react project.",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "author": "Arrastia",
   "main": "build/index.js",
   "types": "build/index.d.ts",
