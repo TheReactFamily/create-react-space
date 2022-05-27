@@ -1,6 +1,6 @@
 export type SpaceLanguage = 'js' | 'ts';
 
-export type SpaceSetupType = 'CRA' | 'DEFAULT' | 'TEMPLATE';
+export type SpaceSetupType = 'CRA' | 'DEFAULT' | 'TEMPLATE' | 'VITE';
 
 export type Templates = 'cra-template' | 'default' | ResolvedTemplates;
 

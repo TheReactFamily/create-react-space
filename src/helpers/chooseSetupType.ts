@@ -13,7 +13,8 @@ export const chooseSetupType = async () => {
 
   const choices: Choice[] = [
     { title: 'Default, clean new space', value: 'DEFAULT' },
-    { title: 'Classic create-react-app', value: 'CRA' }
+    { title: 'Classic create-react-app', value: 'CRA' },
+    { title: 'Vite', value: 'VITE' }
     // { title: `Template from ${link}`, value: 'TEMPLATE' }
   ];
 

@@ -13,6 +13,8 @@ import { createSpace } from './services/createSpace';
 import type { IProgram } from './@types/Program';
 import type { SpaceLanguage, SpaceSetupType } from './@types/Space';
 
+import spawn from 'cross-spawn';
+
 export async function app() {
   const packageJSON = require('../package.json');
 
@@ -74,6 +76,10 @@ export async function app() {
         createSpace(basename(projectRoot), [], 'default', spaceLanguage);
         break;
 
+      case 'VITE':
+        execute(basename(projectRoot));
+        break;
+
       // case 'TEMPLATE':
       //   const templateDir = 'cra-template';
       //   dirname(require.resolve(`../templates/${templateDir}/package.json`));
@@ -84,3 +90,22 @@ export async function app() {
     }
   }
 }
+
+const execute = async (spaceName: string) => {
+  return new Promise<void>((resolve, reject) => {
+    const command = 'npm';
+
+    const args = ['create', 'vite@latest', spaceName, '--', '--template', 'react-ts'];
+
+    const child = spawn(command, args, { stdio: 'inherit' });
+
+    child.on('close', code => {
+      if (code !== 0) {
+        reject({ command: `${command} ${args.join(' ')}` });
+        return;
+      }
+
+      resolve();
+    });
+  });
+};
