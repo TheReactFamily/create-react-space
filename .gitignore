@@ -10,5 +10,3 @@ build/
 *.log
 *.tsbuildinfo
 *~
-
-package-lock.json
