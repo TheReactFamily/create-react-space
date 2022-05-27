@@ -12,8 +12,7 @@ import { createSpace } from './services/createSpace';
 
 import type { IProgram } from './@types/Program';
 import type { SpaceLanguage, SpaceSetupType } from './@types/Space';
-
-import spawn from 'cross-spawn';
+import { executeCommand } from './utils/ScriptsUtils/executeCommand';
 
 export async function app() {
   const packageJSON = require('../package.json');
@@ -77,7 +76,9 @@ export async function app() {
         break;
 
       case 'VITE':
-        execute(basename(projectRoot));
+        const args = ['create', 'vite@latest', basename(projectRoot), '--', '--template', 'react-ts'];
+
+        executeCommand('npm', args);
         break;
 
       // case 'TEMPLATE':
@@ -90,22 +91,3 @@ export async function app() {
     }
   }
 }
-
-const execute = async (spaceName: string) => {
-  return new Promise<void>((resolve, reject) => {
-    const command = 'npm';
-
-    const args = ['create', 'vite@latest', spaceName, '--', '--template', 'react-ts'];
-
-    const child = spawn(command, args, { stdio: 'inherit' });
-
-    child.on('close', code => {
-      if (code !== 0) {
-        reject({ command: `${command} ${args.join(' ')}` });
-        return;
-      }
-
-      resolve();
-    });
-  });
-};
