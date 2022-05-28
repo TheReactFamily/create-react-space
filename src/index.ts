@@ -6,7 +6,7 @@ import { pastel } from 'gradient-string';
 
 import { SUPPORTED_NODE_VERSION } from 'configuration/constants/compatibility';
 
-import { saturn } from 'components/saturn';
+import { reactSpacesASCII } from 'components/reactSpacesASCII';
 
 import { app } from './app';
 
@@ -23,7 +23,7 @@ if (parseInt(nodeVersion) < SUPPORTED_NODE_VERSION) {
   process.exit(1);
 }
 
-console.log(pastel.multiline(saturn()));
+console.log(pastel.multiline(reactSpacesASCII()));
 console.log();
 console.log();
 console.log(`🪐 Welcome to React Spaces! Let's get you set up with a new project.`);
