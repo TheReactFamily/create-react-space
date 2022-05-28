@@ -5,9 +5,18 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
+  rootDir: '.',
   globals: {
     'ts-jest': {
       tsconfig: 'tsconfig.json'
     }
+  },
+  moduleNameMapper: {
+    'components/(.*)': '<rootDir>/src//components/$1',
+    'configuration/(.*)': '<rootDir>/src//configuration/$1',
+    'helpers/(.*)': '<rootDir>/src//helpers/$1',
+    'services/(.*)': '<rootDir>/src//services/$1',
+    'types/(.*)': '<rootDir>/src//types/$1',
+    'utils/(.*)': '<rootDir>/src//utils/$1'
   }
 };
