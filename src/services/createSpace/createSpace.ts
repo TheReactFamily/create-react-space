@@ -11,10 +11,10 @@ import { executeNodeScript } from '../../helpers/executeNodeScript';
 import { generateTemplate } from '../generateTemplate';
 import { install } from '../install';
 
-import type { SpaceLanguage, Templates } from '../../@types/Space/Space.types';
+import type { SpaceLanguage, Templates } from 'types/ReactSpace';
 
 export const createSpace = async (name: string, dependencies: string[], template: Templates, chosenLanguage: SpaceLanguage) => {
-  const packageJson = { name: name, private: true, version: '1.0.0' };
+  const packageJson = { name, version: '0.0.0' };
   const root = resolve(name);
 
   ensureDirSync(name);

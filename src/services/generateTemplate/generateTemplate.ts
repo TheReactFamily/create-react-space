@@ -14,7 +14,8 @@ import { adaptScriptForYarn } from '../../utils/ScriptsUtils';
 import { tryGitCommit, tryGitInit } from '../../utils/GitUtils';
 
 import type { MoveOptions } from 'fs-extra';
-import type { ConfigurationPackage, ConfigurationTemplate, PackageThings, SpaceLanguage, Templates } from '../../@types/Space/Space.types';
+import type { PackageJSON, PackageParameter } from 'types/Package';
+import type { SpaceLanguage, TemplateConfiguration, Templates } from 'types/ReactSpace';
 
 const DEFAULT_REACT_SCRIPTS = {
   start: 'react-scripts start',
@@ -30,7 +31,7 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
   const templatePath = dirname(require.resolve(`../../../templates/${template}/package.json`));
   const templateJSONPath = join(templatePath, chosenLanguage === 'js' ? 'template.json' : 'template-ts.json');
 
-  const templateJson: ConfigurationTemplate = existsSync(templateJSONPath) ? require(templateJSONPath) : {};
+  const templateJson: TemplateConfiguration = existsSync(templateJSONPath) ? require(templateJSONPath) : {};
   const templatePackage = templateJson.package || {};
 
   const templateScripts = templatePackage.scripts || {};
@@ -136,6 +137,6 @@ export const generateTemplate = async (spaceName: string, spacePath: string, tem
   showSuccessMessages(spaceName, spacePath, hasReadme, isUsingYarn);
 };
 
-const templatePackageToReplace = (pack: ConfigurationPackage) => {
-  return Object.keys(pack).filter(key => !PACKAGE_KEYS_TO_IGNORE.includes(key) && !PACKAGE_KEYS_TO_MERGE.includes(key)) as PackageThings[];
+const templatePackageToReplace = (pack: PackageJSON) => {
+  return Object.keys(pack).filter(key => !PACKAGE_KEYS_TO_IGNORE.includes(key) && !PACKAGE_KEYS_TO_MERGE.includes(key)) as PackageParameter[];
 };

@@ -5,7 +5,7 @@ import { TS_CONFIG_FILE, TS_CONFIG_FILE_NAME } from '../../configuration/files/t
 
 import { createFile } from '../../utils/FilesUtils';
 
-import type { SpaceLanguage } from '../../@types/Space';
+import type { SpaceLanguage } from 'types/ReactSpace';
 
 export const createSpaceConfigurationFiles = (chosenLanguage: SpaceLanguage) => {
   const isTS = chosenLanguage === 'ts';

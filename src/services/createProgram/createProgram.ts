@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import { cyan } from 'chalk';
 
-import type { IProgram } from '../../@types/Program';
+import type { IProgram } from 'types/Program';
 
 const { name, version } = require('../../../package.json');
 

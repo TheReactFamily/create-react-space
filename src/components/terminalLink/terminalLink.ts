@@ -1,3 +1,3 @@
-import type { ITerminalLink } from '../../@types/TerminalLink';
+import type { Link } from 'types/Link';
 
-export const terminalLink = ({ fallback, text, url }: ITerminalLink) => (fallback ? fallback(text, url) : `${text} (\u200B${url}\u200B)`);
+export const terminalLink = ({ fallback, text, url }: Link) => (fallback ? fallback(text, url) : `${text} (\u200B${url}\u200B)`);
