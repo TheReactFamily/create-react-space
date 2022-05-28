@@ -18,6 +18,21 @@
     "rootDir": "src",
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES6"
+    "target": "ES6",
+    "baseUrl": ".",
+    "paths": {
+      "components": ["./src/components"],
+      "components/*": ["./src/components/*"],
+      "configuration": ["./src/configuration"],
+      "configuration/*": ["./src/configuration/*"],
+      "helpers": ["./src/helpers"],
+      "helpers/*": ["./src/helpers/*"],
+      "services": ["./src/services"],
+      "services/*": ["./src/services/*"],
+      "types": ["./src/types"],
+      "types/*": ["./src/types/*"],
+      "utils": ["./src/utils"],
+      "utils/*": ["./src/utils/*"]
+    }
   }
 }
