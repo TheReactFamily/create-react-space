@@ -1,14 +1,13 @@
 import { promptSelect } from '../components/promptSelect';
 
-import type { SpaceLanguage } from '../@types/Space';
-
-type Choice = { title: string; value: SpaceLanguage };
+import type { PromptSelectOption } from '../types/Prompt';
+import type { SpaceLanguage } from '../types/ReactSpace';
 
 export const chooseLanguage = async () => {
-  const choices: Choice[] = [
-    { title: 'Typescript', value: 'ts' },
-    { title: 'Javascript', value: 'js' }
+  const options: PromptSelectOption<SpaceLanguage>[] = [
+    { title: 'react', value: 'js' },
+    { title: 'react-ts', value: 'ts' }
   ];
 
-  return await promptSelect({ message: 'Which language would you like to use?', options: choices });
+  return await promptSelect({ message: 'Which language would you like to use?', options });
 };
