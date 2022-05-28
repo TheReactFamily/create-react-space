@@ -1,4 +1,4 @@
-import type { ExternalTool, SpaceLanguage } from '../../types/ReactSpace';
+import type { ExternalTool, SpaceLanguage } from 'types/ReactSpace';
 
 export const getCommand = (spaceName: string, language: SpaceLanguage, tool: ExternalTool): { command: string; args: string[] } => {
   switch (tool) {

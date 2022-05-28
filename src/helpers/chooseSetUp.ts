@@ -1,7 +1,7 @@
-import { promptSelect } from '../components/promptSelect';
+import { promptSelect } from 'components/promptSelect';
 
-import type { PromptSelectOption } from '../types/Prompt';
-import type { SpaceSetUpType } from '../types/ReactSpace';
+import type { PromptSelectOption } from 'types/Prompt';
+import type { SpaceSetUpType } from 'types/ReactSpace';
 
 export const chooseSetUp = async () => {
   // const link = terminalLink({ text: 'TheReactFamily/templates', url: TEMPLATES_REPOSITORY });

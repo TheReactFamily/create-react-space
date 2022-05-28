@@ -4,14 +4,14 @@ import { dirname, join } from 'path';
 import { EOL } from 'os';
 import spawn from 'cross-spawn';
 
-import { PACKAGE_KEYS_TO_IGNORE, PACKAGE_KEYS_TO_MERGE } from '../../configuration/constants/dependencies/dependencies.constant';
-import { SUPPORTED_BROWSERS } from '../../configuration/constants/compatibility/compatibility.config';
+import { PACKAGE_KEYS_TO_IGNORE, PACKAGE_KEYS_TO_MERGE } from 'configuration/constants/dependencies/dependencies.constant';
+import { SUPPORTED_BROWSERS } from 'configuration/constants/compatibility/compatibility.config';
 
-import { createSpaceConfigurationFiles } from '../createSpaceConfigurationFiles';
-import { showSuccessMessages } from '../showSuccessMessages';
+import { createSpaceConfigurationFiles } from 'services/createSpaceConfigurationFiles';
+import { showSuccessMessages } from 'services/showSuccessMessages';
 
-import { adaptScriptForYarn } from '../../utils/ScriptsUtils';
-import { tryGitCommit, tryGitInit } from '../../utils/GitUtils';
+import { adaptScriptForYarn } from 'utils/ScriptsUtils';
+import { tryGitCommit, tryGitInit } from 'utils/GitUtils';
 
 import type { MoveOptions } from 'fs-extra';
 import type { PackageJSON, PackageParameter } from 'types/Package';

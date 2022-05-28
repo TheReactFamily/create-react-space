@@ -1,4 +1,4 @@
-import type { PackageJSON } from 'types/Package/Package.types';
+import type { PackageJSON } from 'types/Package';
 
 export type ExternalTool = 'create-react-app' | 'nextjs' | 'remix' | 'vite';
 

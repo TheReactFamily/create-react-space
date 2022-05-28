@@ -1,7 +1,7 @@
 import { basename, resolve } from 'path';
 import prompts from 'prompts';
 
-import { validateName } from '../utils/validateName';
+import { validateName } from 'utils/validateName';
 
 export const chooseSpaceName = async () => {
   let name = '';

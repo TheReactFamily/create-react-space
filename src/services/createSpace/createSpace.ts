@@ -1,15 +1,15 @@
-import { cyan, green } from 'chalk';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
 import { EOL } from 'os';
+import { green } from 'chalk';
 import { join, resolve } from 'path';
 
-import { FIXED_DEPENDENCIES } from '../../configuration/constants/dependencies';
-import { FIXED_DEV_DEPENDENCIES } from '../../configuration/constants/dependencies/dependencies.constant';
+import { FIXED_DEPENDENCIES } from 'configuration/constants/dependencies';
+import { FIXED_DEV_DEPENDENCIES } from 'configuration/constants/dependencies/dependencies.constant';
 
-import { executeNodeScript } from '../../helpers/executeNodeScript';
+import { executeNodeScript } from 'helpers/executeNodeScript';
 
-import { generateTemplate } from '../generateTemplate';
-import { install } from '../install';
+import { generateTemplate } from 'services/generateTemplate';
+import { install } from 'services/install';
 
 import type { SpaceLanguage, Templates } from 'types/ReactSpace';
 

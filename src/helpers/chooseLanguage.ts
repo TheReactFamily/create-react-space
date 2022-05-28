@@ -1,7 +1,7 @@
-import { promptSelect } from '../components/promptSelect';
+import { promptSelect } from 'components/promptSelect';
 
-import type { PromptSelectOption } from '../types/Prompt';
-import type { SpaceLanguage } from '../types/ReactSpace';
+import type { PromptSelectOption } from 'types/Prompt';
+import type { SpaceLanguage } from 'types/ReactSpace';
 
 export const chooseLanguage = async () => {
   const options: PromptSelectOption<SpaceLanguage>[] = [

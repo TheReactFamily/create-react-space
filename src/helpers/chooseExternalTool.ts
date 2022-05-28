@@ -1,9 +1,7 @@
-import { promptSelect } from '../components/promptSelect';
+import { promptSelect } from 'components/promptSelect';
 
-import { getCommand } from '../utils/ExternalToolsUtils/getCommand';
-
-import type { PromptSelectOption } from '../types/Prompt';
-import type { ExternalTool } from '../types/ReactSpace';
+import type { PromptSelectOption } from 'types/Prompt';
+import type { ExternalTool } from 'types/ReactSpace';
 
 export const chooseExternalTool = async () => {
   const options: PromptSelectOption<ExternalTool>[] = [
@@ -14,7 +12,4 @@ export const chooseExternalTool = async () => {
   ];
 
   return await promptSelect({ message: 'Choose your tool', options });
-  //   const { args, command } = getCommand(spaceName, language, selectedTool);
-
-  //   return { args, command, selectedTool };
 };

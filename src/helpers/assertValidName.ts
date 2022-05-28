@@ -1,6 +1,6 @@
 import { red } from 'chalk';
 
-import { validateName } from '../utils/validateName';
+import { validateName } from 'utils/validateName';
 
 export const assertValidName = (folderName: string) => {
   const validation = validateName(folderName);

@@ -1,6 +1,6 @@
 import { green } from 'chalk';
 
-import { getDirectoryConflicts } from '../utils/DirectoryUtils';
+import { getDirectoryConflicts } from 'utils/DirectoryUtils';
 
 export const assertFolderEmpty = (folderName: string, projectRoot: string) => {
   const conflicts = getDirectoryConflicts(projectRoot);

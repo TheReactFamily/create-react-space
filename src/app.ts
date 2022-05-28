@@ -1,13 +1,13 @@
-import { chooseExternalTool } from './helpers/chooseExternalTool';
-import { chooseLanguage } from './helpers/chooseLanguage';
-import { chooseSetUp } from './helpers/chooseSetUp';
-import { resolveSpaceDirectory } from './helpers/resolveSpaceDirectory';
+import { chooseExternalTool } from 'helpers/chooseExternalTool';
+import { chooseLanguage } from 'helpers/chooseLanguage';
+import { chooseSetUp } from 'helpers/chooseSetUp';
+import { resolveSpaceDirectory } from 'helpers/resolveSpaceDirectory';
 
-import { createProgram } from './services/createProgram';
-import { createSpace } from './services/createSpace';
+import { createProgram } from 'services/createProgram';
+import { createSpace } from 'services/createSpace';
 
-import { executeCommand } from './utils/ScriptsUtils';
-import { getCommand } from './utils/ExternalToolsUtils';
+import { executeCommand } from 'utils/ScriptsUtils';
+import { getCommand } from 'utils/ExternalToolsUtils';
 
 import type { ExternalTool } from 'types/ReactSpace';
 
