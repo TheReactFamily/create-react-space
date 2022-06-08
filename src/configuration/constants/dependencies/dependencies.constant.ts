@@ -1,4 +1,4 @@
-export const FIXED_DEPENDENCIES = ['react', 'react-dom', 'react-scripts', 'web-vitals'];
+export const FIXED_DEPENDENCIES = ['react', 'react-dom', 'react-scripts'];
 export const FIXED_DEV_DEPENDENCIES = {
   js: ['@testing-library/jest-dom', '@testing-library/react', '@testing-library/user-event'],
   ts: [
