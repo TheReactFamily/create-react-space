@@ -13,14 +13,15 @@ import { install } from 'services/install';
 
 import type { SpaceLanguage, Templates } from 'types/ReactSpace';
 
-export const createSpace = async (name: string, dependencies: string[], template: Templates, chosenLanguage: SpaceLanguage) => {
+export const createSpace = async (name: string, dependencies: string[], template: Templates, chosenLanguage: SpaceLanguage, root: string) => {
   const packageJson = { name, version: '0.0.0' };
-  const root = resolve(name);
+  // const root = resolve(name);
 
-  ensureDirSync(name);
+  console.log('root', root);
+  ensureDirSync(root);
 
   console.log();
-  console.log(`Creating a new React space in ${green(name)}.`);
+  console.log(`Creating a new React space in ${green(root)}.`);
   console.log();
 
   writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2) + EOL);

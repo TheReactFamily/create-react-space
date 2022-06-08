@@ -15,9 +15,9 @@ export async function app() {
   let spaceTool: ExternalTool = 'create-react-app';
 
   const { program, spacePath } = createProgram();
-  const { spaceName } = await resolveSpaceDirectory(spacePath);
+  const { spaceName, spaceAbsolutePath } = await resolveSpaceDirectory(spacePath);
 
-  if (program.yes) createSpace(spaceName, [], 'default', 'js');
+  if (program.yes) createSpace(spaceName, [], 'default', 'js', spaceAbsolutePath);
 
   const spaceSetUp = await chooseSetUp();
 
@@ -27,7 +27,7 @@ export async function app() {
 
   switch (spaceSetUp) {
     case 'default':
-      createSpace(spaceName, [], 'default', spaceLanguage);
+      createSpace(spaceName, [], 'default', spaceLanguage, spaceAbsolutePath);
       break;
 
     case 'external-tool':
