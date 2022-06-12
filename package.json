@@ -11,7 +11,7 @@
     "test": "jest --watch",
     "clean": "rimraf build/",
     "copy-files": "copyfiles -u 1 \"templates/**/*\" build/templates",
-    "prepublishOnly": "npm run clean && npm run build",
+    "prepublishOnly": "npm run build",
     "build": "npm run clean && tsc && npm run copy-files"
   },
   "repository": {
