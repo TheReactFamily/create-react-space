@@ -15,9 +15,7 @@ import type { SpaceLanguage, Templates } from 'types/ReactSpace';
 
 export const createSpace = async (name: string, dependencies: string[], template: Templates, chosenLanguage: SpaceLanguage, root: string) => {
   const packageJson = { name, version: '0.0.0' };
-  // const root = resolve(name);
 
-  console.log('root', root);
   ensureDirSync(root);
 
   console.log();

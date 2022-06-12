@@ -9,15 +9,16 @@ import { createSpace } from 'services/createSpace';
 import { executeCommand } from 'utils/ScriptsUtils';
 import { getCommand } from 'utils/ExternalToolsUtils';
 
-import type { ExternalTool } from 'types/ReactSpace';
+import type { ExternalTool, Templates } from 'types/ReactSpace';
 
 export async function app() {
   let spaceTool: ExternalTool = 'create-react-app';
+  let spaceTemplate: Templates = 'default';
 
   const { program, spacePath } = createProgram();
   const { spaceName, spaceAbsolutePath } = await resolveSpaceDirectory(spacePath);
 
-  if (program.yes) createSpace(spaceName, [], 'default', 'js', spaceAbsolutePath);
+  if (program.yes) createSpace(spaceName, [], spaceTemplate, 'js', spaceAbsolutePath);
 
   const spaceSetUp = await chooseSetUp();
 
@@ -27,7 +28,7 @@ export async function app() {
 
   switch (spaceSetUp) {
     case 'default':
-      createSpace(spaceName, [], 'default', spaceLanguage, spaceAbsolutePath);
+      createSpace(spaceName, [], spaceTemplate, spaceLanguage, spaceAbsolutePath);
       break;
 
     case 'external-tool':
