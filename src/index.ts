@@ -5,9 +5,9 @@ require('module-alias/register');
 import { cyan, green, redBright } from 'chalk';
 import { pastel } from 'gradient-string';
 
-import { SUPPORTED_NODE_VERSION } from 'configuration/constants/compatibility';
+import { SUPPORTED_NODE_VERSION } from './configuration/constants/compatibility';
 
-import { reactSpacesASCII } from 'components/reactSpacesASCII';
+import { reactSpacesASCII } from './components/reactSpacesASCII';
 
 import { app } from './app';
 
