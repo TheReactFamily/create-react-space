@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import 'module-alias/register';
+require('module-alias/register');
+// import 'module-alias/register';
 
 import { cyan, green, redBright } from 'chalk';
 import { pastel } from 'gradient-string';
