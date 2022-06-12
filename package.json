@@ -68,7 +68,7 @@
   },
   "_moduleAliases": {
     "components": "build/components",
-    "configuration": "build/configuration",
+    "configuration": "build/configuration/*",
     "helpers": "build/helpers",
     "services": "build/services",
     "types": "build/types",
