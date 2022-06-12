@@ -18,6 +18,7 @@
     "rootDir": "src",
     "skipLibCheck": true,
     "strict": true,
+    "importsNotUsedAsValues": "error",
     "target": "ES6",
     "baseUrl": ".",
     "paths": {
