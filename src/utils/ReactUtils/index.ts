@@ -1,0 +1,1 @@
+export { isReactInstalled } from './isReactInstalled';

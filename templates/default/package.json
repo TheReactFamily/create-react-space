@@ -1,0 +1,26 @@
+{
+  "name": "default-space",
+  "version": "1.0.0",
+  "keywords": [
+    "react",
+    "create-react-space",
+    "template"
+  ],
+  "description": "The default template for Create React Space.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/space-rx/create-react-space.git",
+    "directory": "src/templates/default"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "bugs": {
+    "url": "https://github.com/space-rx/create-react-space/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "package": {
+    "dependencies": {},
+    "devDependencies": {},
+    "eslintConfig": {
+      "extends": ["react-app", "react-app/jest"]
+    }
+  }
+}

@@ -1,40 +1,43 @@
-import { Command } from 'commander';
-import { cyan, green } from 'chalk';
+import { chooseExternalTool } from 'helpers/chooseExternalTool';
+import { chooseLanguage } from 'helpers/chooseLanguage';
+import { chooseSetUp } from 'helpers/chooseSetUp';
+import { resolveSpaceDirectory } from 'helpers/resolveSpaceDirectory';
 
-import { run } from './services/run';
+import { createProgram } from 'services/createProgram';
+import { createSpace } from 'services/createSpace';
 
-import type { IProgram } from './@types/Program';
+import { executeCommand } from 'utils/ScriptsUtils';
+import { getCommand } from 'utils/ExternalToolsUtils';
 
-export function app() {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const packageJSON = require('../package.json');
+import type { ExternalTool, Templates } from 'types/ReactSpace';
 
-  let inputPath = '';
+export async function app() {
+  let spaceTool: ExternalTool = 'create-react-app';
+  let spaceTemplate: Templates = 'default';
 
-  const program: IProgram = new Command(packageJSON.name)
-    .version(packageJSON.version)
-    .arguments('<project-root>')
-    .usage(`${cyan('<project-root>')} [options]`)
-    .description('Creates a react space')
-    .option('--help', 'Display help menu')
-    .option('--use-npm', 'Use npm to install dependencies. (Default when Yarn is not installed)')
-    .option('-y, --yes', 'Use the default options to create the space')
-    .option('-t, --template [template|url]', 'The name of a template from spaces/templates or URL to a GitHub repo that contains a template')
-    .option('--template-path [name]', 'The path inside of a GitHub repo where the example lives')
-    .allowUnknownOption()
-    .action(projectRoot => (inputPath = projectRoot))
-    .parse(process.argv);
+  const { program, spacePath } = createProgram();
+  const { spaceName, spaceAbsolutePath } = await resolveSpaceDirectory(spacePath);
 
-  if (inputPath === '') {
-    console.error('Please specify the project directory:');
-    console.log(`  ${cyan(program.name())} ${green('<project-directory>')}`);
-    console.log();
-    console.log('For example:');
-    console.log(`  ${cyan(program.name())} ${green('my-react-app')}`);
-    console.log();
-    console.log(`Run ${cyan(`${program.name()} --help`)} to see all options.`);
-    process.exit(1);
+  if (program.yes) createSpace(spaceName, [], spaceTemplate, 'js', spaceAbsolutePath);
+
+  const spaceSetUp = await chooseSetUp();
+
+  if (spaceSetUp === 'external-tool') spaceTool = await chooseExternalTool();
+
+  const spaceLanguage = await chooseLanguage();
+
+  switch (spaceSetUp) {
+    case 'default':
+      createSpace(spaceName, [], spaceTemplate, spaceLanguage, spaceAbsolutePath);
+      break;
+
+    case 'external-tool':
+      const { args, command } = getCommand(spaceName, spaceLanguage, spaceTool);
+
+      executeCommand(command, args);
+      break;
+
+    default:
+      throw new Error('Incorrect option selected.');
   }
-
-  run({ inputPath, program });
 }
